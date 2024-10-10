@@ -1,0 +1,1 @@
+export const STORAGE_KEY = 'LOCAL_USER_DATA'
