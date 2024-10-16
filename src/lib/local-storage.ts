@@ -1,16 +1,16 @@
 import CryptoJS from 'crypto-js';
 import { StateType } from '@/types';
 import { STORAGE_KEY } from '@/utils/constants';
-import { initCloudStorage } from '@telegram-apps/sdk';
+import { setCloudStorageItem, getCloudStorageItem, deleteCloudStorageItem } from '@telegram-apps/sdk';
 
-const cloudStorage = initCloudStorage();
+// const cloudStorage = initCloudStorage();
 
 const secretKey = import.meta.env.VITE_ENCRYPT_KEY;
 
 export const fetchLocalUserData = async (storeKey = STORAGE_KEY, initialState = {}) => {
   try {
     // const userData = localStorage.getItem(storeKey);
-    const userData = await cloudStorage.get(storeKey)
+    const userData = await getCloudStorageItem(storeKey)
     if (userData) {
       const bytes = CryptoJS.AES.decrypt(userData, secretKey);
       const decryptedData = JSON.parse(bytes?.toString(CryptoJS.enc.Utf8));
@@ -30,7 +30,7 @@ export const storeLocalUserData = async (userData: StateType, storeKey = STORAGE
   const ciphertext = CryptoJS.AES.encrypt(data, secretKey).toString();
   try {
     // localStorage.setItem(storeKey, ciphertext);
-    cloudStorage.set(storeKey, ciphertext)
+    setCloudStorageItem(storeKey, ciphertext)
   } catch (error) {
     console.log(error);
     throw new Error('Local storage permission is needed');
@@ -40,7 +40,7 @@ export const storeLocalUserData = async (userData: StateType, storeKey = STORAGE
 export const deleteLocalUserData = (storeKey = STORAGE_KEY) => {
   try {
     // localStorage.removeItem(storeKey)
-    cloudStorage.delete(storeKey)
+    deleteCloudStorageItem(storeKey)
   } catch (error) {
     console.log(error);
     throw new Error('Local storage permission is needed');

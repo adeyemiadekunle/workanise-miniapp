@@ -13,7 +13,7 @@ export const AuthLayout = () => {
     getUserData();
   }, []);
 
-  if (accessToken) return <Navigate to={`/`} replace />;
+  // if (accessToken) return <Navigate to={`/`} replace />;
   return (
     <div className="h-full">
       <Outlet />

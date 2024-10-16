@@ -1,17 +1,44 @@
-import { useInitData } from "@telegram-apps/sdk-react";
+import { initDataUser } from '@telegram-apps/sdk-react';
+import { DailyLoginReward } from './components/daily-login';
+import { Tips } from './components/tips';
+import { useState } from 'react';
+import { HomeComponent } from './components/home';
 
 export const Home = () => {
-  const initData = useInitData()
+  const initData = initDataUser();
+
+  const [openDaily, setCloseDaily] = useState(true);
+  const [openTips, setCloseTips] = useState(false);
+
+  // const handleOpen = () => {
+  //   setCloseDaily(true);
+  // };
+
+  const openNextDrawer = () => {
+    setCloseTips(true); // Opens the Tips drawer after DailyLoginReward is closed
+  };
 
   if (!initData) {
-    return;
+    return null;
   }
 
   return (
     <>
-      <div>
-        {initData.user ? initData.user.username : "No user data available"}
-      </div>
+      <HomeComponent
+        username={initData?.username}
+      />
+
+      <DailyLoginReward
+        open={openDaily}
+        setClose={setCloseDaily}
+        openNextDrawer={openNextDrawer} // Pass the function to open Tips
+      />
+
+      <Tips
+        open={openTips}
+        setClose={setCloseTips}
+      />
+
     </>
   );
 };
