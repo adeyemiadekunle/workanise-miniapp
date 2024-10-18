@@ -1,6 +1,6 @@
-import { ReactNode, createContext, useEffect, useMemo, useReducer } from 'react'
+import { ReactNode, createContext, useMemo, useReducer } from 'react'
 import { initialState, initializer, reducer } from './store'
-import { ActionEnums, AppContextType } from '@/types'
+import { AppContextType } from '@/types'
 
 export const AppContext = createContext<AppContextType>({
 	state: initialState,
@@ -9,17 +9,7 @@ export const AppContext = createContext<AppContextType>({
 
 export function AppContextProvider({ children }: { children: ReactNode }) {
 
-	const [state, dispatch] = useReducer(reducer, initialState)
-
-	
-	useEffect(() => {
-		const fetchData = async () => {
-			const initialData = await initializer();
-			dispatch({ type: ActionEnums.SAVE_TO_STATE, payload: initialData });
-		};
-		fetchData();
-	}, []);
-
+	const [state, dispatch] = useReducer(reducer, initialState, initializer)
 
 	const value = useMemo(
 		() => ({
@@ -28,6 +18,5 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
 		}),
 		[state, dispatch]
 	)
-
 	return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }

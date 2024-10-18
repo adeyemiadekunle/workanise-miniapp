@@ -25,7 +25,7 @@ export const DailyLoginReward = ({ open, setClose, openNextDrawer }: DailyLoginP
       openChange={() => setClose?.(false)}
     >
       <div className="flex flex-col mx-auto w-full">
-        <div className="mt-[150px]">
+        <div className="mt-[100px]">
           <h1 className="text-[32px] text-primary font-bold text-center">Your Daily Rewards</h1>
         </div>
         <div className="flex flex-col justify-center items-center mb-[20px]">
@@ -37,7 +37,7 @@ export const DailyLoginReward = ({ open, setClose, openNextDrawer }: DailyLoginP
         <div className="mt-[40px]">
           <p className="text-center">Continue for your daily reward</p>
         </div>
-        <div className="mt-[60px]">
+        <div className="mt-[50px]">
           <Button variant='secondary' size='lg' onClick={handleCloseandContinue}>
             Continue
           </Button>

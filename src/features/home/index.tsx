@@ -7,7 +7,7 @@ import { HomeComponent } from './components/home';
 export const Home = () => {
   const initData = initDataUser();
 
-  const [openDaily, setCloseDaily] = useState(true);
+  const [openDaily, setCloseDaily] = useState(false);
   const [openTips, setCloseTips] = useState(false);
 
   // const handleOpen = () => {

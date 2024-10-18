@@ -1,8 +1,8 @@
+import { Task } from "./components/tasks";
 export const Tasks = () => {
-   return (
-     <>
-       <div>Task</div>
-     </>
-   );
- };
- 
+  return (
+    <>
+      <Task />
+    </>
+  );
+};

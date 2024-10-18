@@ -8,9 +8,9 @@ export const initialState: StateType = {
 	refreshToken: '',
 }
 
-export const initializer = async (
+export const initializer = (
 	initialValue: StateType = initialState
-): Promise<StateType> =>  await fetchLocalUserData(STORAGE_KEY, initialValue)
+): StateType => fetchLocalUserData(STORAGE_KEY, initialValue)
 
 export function reducer(state: StateType, action: ActionType) {
 	switch (action.type) {

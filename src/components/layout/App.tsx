@@ -15,7 +15,7 @@ function App() {
 
   return (
     <AppRoot
-      appearance={isDark ? 'dark' : 'light'}
+      appearance={isDark ? 'dark' : undefined}
       platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
     >
       <QueryClientProvider client={queryClient}>

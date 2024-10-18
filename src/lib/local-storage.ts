@@ -1,16 +1,19 @@
 import CryptoJS from 'crypto-js';
 import { StateType } from '@/types';
 import { STORAGE_KEY } from '@/utils/constants';
-import { setCloudStorageItem, getCloudStorageItem, deleteCloudStorageItem } from '@telegram-apps/sdk';
+
 
 // const cloudStorage = initCloudStorage();
 
 const secretKey = import.meta.env.VITE_ENCRYPT_KEY;
+if (!secretKey) {
+  throw new Error('Encryption key (VITE_ENCRYPT_KEY) is not defined');
+}
 
-export const fetchLocalUserData = async (storeKey = STORAGE_KEY, initialState = {}) => {
+export const fetchLocalUserData =  (storeKey = STORAGE_KEY, initialState = {}) => {
   try {
-    // const userData = localStorage.getItem(storeKey);
-    const userData = await getCloudStorageItem(storeKey)
+    const userData = localStorage.getItem(storeKey);
+
     if (userData) {
       const bytes = CryptoJS.AES.decrypt(userData, secretKey);
       const decryptedData = JSON.parse(bytes?.toString(CryptoJS.enc.Utf8));
@@ -24,13 +27,12 @@ export const fetchLocalUserData = async (storeKey = STORAGE_KEY, initialState = 
   }
 };
 
-export const storeLocalUserData = async (userData: StateType, storeKey = STORAGE_KEY) => {
-  const prevData = await fetchLocalUserData(storeKey);
+export const storeLocalUserData = (userData: StateType, storeKey = STORAGE_KEY) => {
+  const prevData = fetchLocalUserData(storeKey);
   const data = JSON.stringify({ ...prevData, ...userData });
   const ciphertext = CryptoJS.AES.encrypt(data, secretKey).toString();
   try {
-    // localStorage.setItem(storeKey, ciphertext);
-    setCloudStorageItem(storeKey, ciphertext)
+    localStorage.setItem(storeKey, ciphertext);
   } catch (error) {
     console.log(error);
     throw new Error('Local storage permission is needed');
@@ -39,8 +41,7 @@ export const storeLocalUserData = async (userData: StateType, storeKey = STORAGE
 
 export const deleteLocalUserData = (storeKey = STORAGE_KEY) => {
   try {
-    // localStorage.removeItem(storeKey)
-    deleteCloudStorageItem(storeKey)
+    localStorage.removeItem(storeKey)
   } catch (error) {
     console.log(error);
     throw new Error('Local storage permission is needed');

@@ -19,7 +19,7 @@ export const Navigation = () => {
 	const location = useLocation()
 
 	return (
-		<div className='flex space-x-2 justify-between pt-3 px-6 w-full'>
+		<div className='flex space-x-2 justify-between pt-3 px-8 w-full mb-2'>
 			{navItems.map((item, index) => (
 				<Link
 					key={index}

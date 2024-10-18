@@ -28,3 +28,10 @@ export function formatAmount(amount?: number | string): string {
       return `${integerPart}.${decimalPart}`;
   }
 }
+
+
+export function getInitials(firstName: string, lastName: string) {
+	const firstInitial = firstName?.charAt(0).toUpperCase() || '';
+	const lastInitial = lastName?.charAt(0).toUpperCase() || '';
+	return firstInitial + lastInitial;
+}
