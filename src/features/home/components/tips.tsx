@@ -13,7 +13,7 @@ interface TipsProps {
 
 export const Tips = ({ open, setClose }: TipsProps) => {
 
-   const [reward, setReward] = useState(true)
+   const [reward] = useState(true)
 
    return (
       <CustomDrawer

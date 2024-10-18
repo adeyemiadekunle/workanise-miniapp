@@ -6,7 +6,7 @@ import { Friend } from "./components/friend";
 export const Friends = () => {
 
   const [openInvite, setOpenInvite] = useState(false)
-  const [friend, setFriend] = useState(true)
+  const [friend] = useState(true)
 
   const Invite = () => {
     setOpenInvite(true)
