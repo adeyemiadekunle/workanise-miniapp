@@ -4,20 +4,26 @@ import { useGetSession } from "../api/get-session";
 import { usePostStartSession } from "../api/post-start-session";
 import { useToast } from "@/hooks/ToastContext";
 import { fetchLocalUserData } from "@/lib/local-storage";
+import { formatTime } from "@/utils/helper-funcs";
 
 
-interface HomeProps {
-   username?: string
-}
+// interface HomeProps {
+//    username?: string
+// }
 
-export const HomeComponent = ({ username }: HomeProps) => {
+export const HomeComponent = () => {
    const { user } = fetchLocalUserData() || {}
 
    // Check if user is defined before accessing user.id
    const { showToast } = useToast();
    const userId = user?.id; // Use optional chaining to safely access user.id
 
-   const { data } = useGetSession({ userId }) // Pass userId, which may be undefined
+   const { data, error } = useGetSession({
+      userId,
+      refetchInterval: 1000 // Refetch data every second
+   });
+
+   const { active, remainingTimeSeconds, earnedPoints } = data?.data?.session || {};
 
    const { mutate } = usePostStartSession({
       mutationConfig: {
@@ -36,34 +42,41 @@ export const HomeComponent = ({ username }: HomeProps) => {
       }
    }
 
-   console.log(data)
+   if (error) {
+      showToast(`Error ${error}`, 'error')
+   }
 
 
    return (
-      <div className="flex flex-col items-center">
-         <div className=" flex justify-center items-center w-full mt-[50px]">
-            <p className="text-center py-1 px-2 border border-slate-800 rounded-md bg-slate-800 max-w-[80%] text-white">Click icon to take order</p>
-         </div>
-         <div className="flex flex-col justify-center items-center mt-[30px]">
-            <div onClick={startSession} className="border p-3 rounded-full bg-secondary border-secondary">
-               <img src={Avatar} alt="avatar" />
+      <div className="flex flex-col items-center justify-between h-full ">
+         <div >
+            <div className=" flex justify-center items-center w-full mt-[70px]">
+               <p className={`text-center py-1 px-2 border border-slate-800 rounded-md bg-slate-800  ${active == true ? 'text-secondary' : 'text-white'}`}>Click icon to take order</p>
             </div>
-            <h3 className="text-[32px] font-bold text-secondary mt-[15px]">{username}</h3>
+            <div className="flex flex-col justify-center items-center mt-[30px]">
 
-            <div className="text-[40px] text-secondary font-bold mt-[10px]">58,425 WP</div>
-            {/* animate the change in number */}
+               {/*  */}
+               <div onClick={startSession} className={`border p-3 rounded-full ${active == true ? 'bg-primary border-primary' : 'bg-secondary border-secondary'}  cursor-pointer`}>
+                  <img src={Avatar} alt="avatar" />
+               </div>
+
+               <h3 className={`text-[32px] ${active == true ? 'text-white' : 'text-secondary'} font-bold mt-[15px]`}>{user?.username}</h3>
+
+               <div className={`text-[40px] ${active == true ? 'text-white' : 'text-secondary'} font-bold mt-[10px]`}>500 WP</div>
+               {/* animate the change in number */}
+            </div>
          </div>
 
 
-         <div className="mt-[60px] relative w-[95%]">
-            <div className="flex w-full h-[70px] bg-secondary items-center justify-end px-5 rounded-3xl absolute z-0">
-               <p>00h 00m</p>
+         <div className="pb-6 relative w-[100%]">
+            <div className="flex w-full h-[70px] bg-secondary items-center justify-end px-3 rounded-3xl absolute z-0">
+               <p className="">{formatTime(remainingTimeSeconds || 0)}</p>
                {/* to animate */}
             </div>
-            <div className="flex w-[75%] h-[70px] bg-secondary items-center justify-between px-5 rounded-3xl relative z-4">
+            <div className={`flex w-[75%] h-[70px] ${active == true ? 'bg-primary' : 'bg-secondary'} items-center justify-between px-5 rounded-3xl relative z-4`}>
                <img src={Logo2} alt="logo2" />
                <p className="py-0.5 px-3 bg-slate-800 rounded-md text-[12px] text-nowrap">Seller is active</p>
-               <p className="text-black">00.00</p>
+               <p className="text-black">{earnedPoints}</p>
                {/* to animate */}
             </div>
          </div>

@@ -35,39 +35,41 @@ export const Friend = ({ openInvite }: FriendProps) => {
 
 
    return (<>
-      <div>
-         <div className="pt-3 flex items-center flex-col justify-center space-y-5">
-            <Avatar className=" w-28 h-28 text-black">
-               <AvatarImage src={AvatarPlaceHolder} />
-               <AvatarFallback className="text-2xl">CN</AvatarFallback>
-            </Avatar>
-            <h1 className="text-4xl font-bold text-center my-5 w-3/4">
-               WUSD 0
-            </h1>
+      <div className="flex flex-col justify-between h-full">
+         <div className="mt-10">
+            <div className="pt-3 flex items-center flex-col justify-center space-y-6">
+               <Avatar className=" w-28 h-28 text-black">
+                  <AvatarImage src={AvatarPlaceHolder} />
+                  <AvatarFallback className="text-2xl">CN</AvatarFallback>
+               </Avatar>
+               <h1 className="text-4xl font-bold text-center my-5 w-3/4">
+                  WUSD 0
+               </h1>
 
-            <Button variant='default' size='lg' className="rounded-full w-[60%] text-xl font-bold">Claim</Button>
+               <Button variant='default' size='lg' className="rounded-full w-[60%] text-xl font-bold">Claim</Button>
+            </div>
+
+            <div className="mt-[30px] mb-[20px]">
+               <p className="font-bold text-xl"> 3 Friends</p>
+            </div>
+
+            <div className="space-y-6 overflow-y-auto h-[160px]">
+               {
+                  datas.map((data) => {
+                     return (
+                        <FriendItems
+                           username={data.username}
+                           firstName={data.firstName}
+                           lastName={data.lastName}
+                           points={data.referralpoints}
+                        />
+                     )
+                  })
+               }
+            </div>
+
          </div>
-
-         <div className="mt-[30px] mb-[20px]">
-            <p className="font-bold text-xl"> 3 Friends</p>
-         </div>
-
-         <div className="space-y-6 overflow-y-auto h-40">
-            {
-               datas.map((data) => {
-                  return (
-                     <FriendItems
-                        username={data.username}
-                        firstName={data.firstName}
-                        lastName={data.lastName}
-                        points={data.referralpoints}
-                     />
-                  )
-               })
-            }
-         </div>
-
-         <div className="pt-6">
+         <div className="pb-1">
             <Button
                onClick={() => openInvite()}
                variant='secondary' size='lg'> <FaUser size={18} className="mr-2" />Invite</Button>

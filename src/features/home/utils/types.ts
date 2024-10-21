@@ -1,3 +1,4 @@
+import { UserType } from "@/types";
 import { ApiResponse } from "@/utils/api-types";
 
 interface sessionStatus {
@@ -7,16 +8,21 @@ interface sessionStatus {
 }
 
 export interface Session {
-  id: string;
-  userId: string;
-  startTime: Date | null;
-  endTime: Date | null;
-  earnedPoints: number;
-  active: boolean;
-  status: sessionStatus;
-  createdAt: Date;
-  claimed: boolean;
-  updatedAt: Date;
+  session: {
+    id: string;
+    userId: string;
+    startTime: Date | null;
+    endTime: Date | null;
+    earnedPoints: number;
+    active: boolean;
+    status: sessionStatus;
+    createdAt: Date;
+    claimed: boolean;
+    updatedAt: Date;
+    remainingTimeSeconds: number;
+    miningRate?: number;
+    user: UserType;
+  };
 }
 
 export type SessionAPIResponse = ApiResponse<Session>;

@@ -7,6 +7,12 @@ export interface UserType {
 	photoUrl: string | null;
 	referralCode?: string;
 	role?:string
+	miningRate: number
+	lastSessionEnd: string | null
+	missedSession: string | null
+	createdAt: string
+	updatedAt: string
+	balance: number
  }
 
 export interface StateType {

@@ -25,7 +25,6 @@ export const Home = () => {
   return (
     <>
       <HomeComponent
-        username={initData?.username}
       />
 
       <DailyLoginReward

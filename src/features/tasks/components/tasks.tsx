@@ -9,7 +9,7 @@ import { WeeklyTaskCard } from "./weekly-task";
 export const Task = () => {
    return (<>
 
-      <div>
+      <div className="h-full">
          <div className="mt-[20px]">
             <h2 className="text-2xl font-bold">Tasks</h2>
          </div>
@@ -18,15 +18,6 @@ export const Task = () => {
             <TaskCard onClick={() => console.log("click")} />
             <TaskCard onClick={() => console.log("click")} />
          </div>
-         {/* <ScrollArea>
-            <div className="inline-flex space-x-6 py-5" style={{ overflow: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-               <TaskCard onClick={() => console.log("click")} />
-               <TaskCard onClick={() => console.log("click")} />
-               <TaskCard onClick={() => console.log("click")} />
-            </div>
-            <ScrollBar orientation="horizontal" className="hidden" />
-         </ScrollArea> */}
-
          <div>
             <h3 className="text-xl font-bold pb-3">Weekly</h3>
             <div className="overflow-x-auto flex space-x-6" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>

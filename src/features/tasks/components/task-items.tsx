@@ -19,7 +19,7 @@ export function TaskItem({ title, reward, action, }: TaskItemProps) {
             </div>
          </div>
          <div className="">
-            <button className="bg-white text-black rounded-3xl py-2 px-5">{action}</button>
+            <button className="bg-white text-black rounded-3xl py-1.5 px-5">{action}</button>
          </div>
       </div>
    );

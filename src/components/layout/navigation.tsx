@@ -10,10 +10,10 @@ import {
 export const Navigation = () => {
 	// Array of navigation items
 	const navItems = [
-		{ path: '/', icon: <FaHouse size={20} />, label: 'Home' },
-		{ path: '/tasks', icon: <FaCoins size={20} />, label: 'Tasks' },
-		{ path: '/friends', icon: <FaUsers size={20} />, label: 'Friends' },
-		{ path: '/web3', icon: <FaGlobe size={20} />, label: 'Web3' },
+		{ path: '/', icon: <FaHouse size={18} />, label: 'Home' },
+		{ path: '/tasks', icon: <FaCoins size={18} />, label: 'Tasks' },
+		{ path: '/friends', icon: <FaUsers size={18} />, label: 'Friends' },
+		{ path: '/web3', icon: <FaGlobe size={18} />, label: 'Web3' },
 	]
 
 	const location = useLocation()
@@ -28,7 +28,7 @@ export const Navigation = () => {
 						}`}
 				>
 					{item.icon}
-					<span className='text-base pt-1'>{item.label}</span>
+					<span className='text-[12px] pt-1'>{item.label}</span>
 				</Link>
 			))}
 		</div>

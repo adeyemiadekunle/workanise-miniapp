@@ -21,14 +21,18 @@ export const getSessionQueryOptions = (userId: string | undefined) => {
 type UseGetSessionOptions = {
   userId: string | undefined;
   queryConfig?: QueryConfig<typeof getSessionQueryOptions>;
+  refetchInterval?: number;  // auto-refetching interval
 };
 
 export const useGetSession = ({
   queryConfig,
   userId,
+  refetchInterval
 }: UseGetSessionOptions) => {
   return useQuery({
     ...getSessionQueryOptions(userId),
     ...queryConfig,
+    refetchInterval
+
   });
 };
