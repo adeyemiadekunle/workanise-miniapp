@@ -2,7 +2,7 @@ import Avatar from "@/assets/icons/avatar.svg"
 import Logo2 from "@/assets/icons/logo2-white.svg"
 import { useGetSession } from "../api/get-session";
 import { usePostStartSession } from "../api/post-start-session";
-import { useToast } from "@/hooks/ToastContext";
+// import { useToast } from "@/hooks/ToastContext";
 import { fetchLocalUserData } from "@/lib/local-storage";
 import { formatTime } from "@/utils/helper-funcs";
 
@@ -15,10 +15,12 @@ export const HomeComponent = () => {
    const { user } = fetchLocalUserData() || {}
 
    // Check if user is defined before accessing user.id
-   const { showToast } = useToast();
-   const userId = user?.id; // Use optional chaining to safely access user.id
+   // const { showToast } = useToast();
+   const userId = user.id; // Use optional chaining to safely access user.id
 
-   const { data, error } = useGetSession({
+   console.log(user)
+
+   const { data, } = useGetSession({
       userId,
       refetchInterval: 1000 // Refetch data every second
    });
@@ -38,13 +40,10 @@ export const HomeComponent = () => {
          mutate?.({ userId })
       } catch (error) {
          console.error("Error starting session:", error);
-         showToast(`Error to start session ${error}`, 'error')
+         // showToast(`Error to start session ${error}`, 'error')
       }
    }
 
-   if (error) {
-      showToast(`Error ${error}`, 'error')
-   }
 
 
    return (
