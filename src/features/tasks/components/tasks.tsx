@@ -36,22 +36,22 @@ export const Task = () => {
                </TabsList>
                <TabsContent value="new" className="space-y-6 pt-2">
                   <TaskItem
-                     title="Complete New User Tutorial"
+                     title="Complete New User"
                      reward={100}
                      action="Start"
                   />
                   <TaskItem
-                     title="Complete New User Tutorial"
+                     title="Complete New User"
                      reward={100}
                      action="Start"
                   />
                   <TaskItem
-                     title="Complete New User Tutorial"
+                     title="Complete New User"
                      reward={100}
                      action="Start"
                   />
                   <TaskItem
-                     title="Complete New User Tutorial"
+                     title="Complete New User"
                      reward={100}
                      action="Start"
                   />

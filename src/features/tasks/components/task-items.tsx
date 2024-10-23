@@ -14,12 +14,12 @@ export function TaskItem({ title, reward, action, }: TaskItemProps) {
          <div className="flex items-center gap-3">
             <FaYoutube size={36} />
             <div className="flex flex-col items-start">
-               <h3 className="text-base font-semibold">{title}</h3>
+               <h3 className="font-semibold">{title}</h3>
                <p>+{reward} WP</p>
             </div>
          </div>
          <div className="">
-            <button className="bg-white text-black rounded-3xl py-1.5 px-5">{action}</button>
+            <button className="bg-white text-black rounded-3xl py-1.5 px-4">{action}</button>
          </div>
       </div>
    );

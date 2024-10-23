@@ -22,7 +22,7 @@ export default function ToastNotification() {
   const { bgColor, Icon } = getToastConfig();
 
   return (
-    <div className={`fixed top-5 inset-x-4 z-50 flex items-center justify-between py-3 px-4 rounded-full shadow-lg text-white ${bgColor}`}>
+    <div className={`fixed top-5 inset-x-4 z-99 flex items-center justify-between py-3 px-4 rounded-full shadow-lg text-white ${bgColor}`}>
       <div className="flex items-center">
         <Icon className="w-5 h-5 mr-2" aria-hidden="true" />
         <span className="text-sm">{toast.message}</span>

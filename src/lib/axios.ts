@@ -59,7 +59,6 @@ async function refreshAccessToken() {
 	headers: { Authorization: `Bearer ${refreshToken}` },
 })
 
-console.log(response)
 
   const newAccessToken = response.data.data?.accessToken;
   const newRefreshToken = response.data.data?.refreshToken;

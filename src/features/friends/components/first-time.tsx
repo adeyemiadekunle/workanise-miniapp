@@ -10,7 +10,7 @@ interface FirstTimeRefferalProps {
 export const FirstTimeRefferal = ({ openInvite }: FirstTimeRefferalProps) => {
 
    return (<>
-      <div className="pt-3">
+      <div className="pt-3 px-3">
          <div className="flex flex-col items-center justify-center mb-[20px]">
             <Avatar className=" w-24 h-24 text-black">
                <AvatarImage src={AvatarPlaceHolder} />
@@ -51,7 +51,7 @@ export const FirstTimeRefferal = ({ openInvite }: FirstTimeRefferalProps) => {
          <div className="pt-[20px]">
             <Button
                onClick={() => openInvite()}
-               variant='secondary' size='lg'> <FaUser size={18} className="mr-2" />Invite</Button>
+               variant='secondary' size='lg'> <FaUser size={16} className="mr-2" />Invite</Button>
          </div>
 
       </div>

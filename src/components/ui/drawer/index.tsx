@@ -2,7 +2,6 @@ import { cn } from '@/utils/helper-funcs'
 import {
    Drawer,
    DrawerContent,
-   DrawerFooter
 } from "./drawer"
 
 export interface CustomDrawerProps {
@@ -31,7 +30,7 @@ export function CustomDrawer({
 
       >
          <DrawerContent
-            className={cn('h-[80%] bg-gray-900', dhClassName)}>
+            className={cn('h-[80%] bg-gray-900 flex flex-col mb-2', dhClassName)}>
             {children && (
                <div className='mx-auto w-full h-full p-5'>
                   {children}
@@ -39,11 +38,12 @@ export function CustomDrawer({
             )}
 
 
-            <DrawerFooter>
-               {footer}
-            </DrawerFooter>
 
+            <div>
+               {footer}
+            </div>
          </DrawerContent>
+
       </Drawer>
    )
 }

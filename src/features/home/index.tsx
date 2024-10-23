@@ -4,6 +4,7 @@ import { Tips } from './components/tips';
 import { useState } from 'react';
 import { HomeComponent } from './components/home';
 
+
 export const Home = () => {
   const initData = initDataUser();
 
@@ -25,6 +26,7 @@ export const Home = () => {
   return (
     <>
       <HomeComponent
+        username={initData.username}
       />
 
       <DailyLoginReward
