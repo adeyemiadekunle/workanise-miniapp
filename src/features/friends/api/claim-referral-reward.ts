@@ -1,27 +1,26 @@
 import { api } from "@/lib/axios";
-import { ClaimTipAPIResponse } from "../utils/types";
+import { UserAPIResponse } from "@/types";
 import { MutationConfig } from "@/lib/react-query";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getUserQueryOptions } from "@/api/get-user";
 
-
-export const postClaimTipFn = async ({
+export const postClaimReferralRewardFn = async ({
   userId,
 }: {
   userId: string;
-}): Promise<ClaimTipAPIResponse> => {
-  return api.post(`/user/tip/${userId}`);
+}): Promise<UserAPIResponse> => {
+  return api.post(`/user/referrals/claim`, {userId});
 };
 
-type UsePostClaimTipOptions = {
-  mutationConfig?: MutationConfig<typeof postClaimTipFn>;
-  userId?:string
+type UsePostClaimReferralRewardOptions = {
+  mutationConfig?: MutationConfig<typeof postClaimReferralRewardFn>;
+  userId?: string;
 };
 
-export function usePostClaimTip({
+export function usePostClaimReferralReward({
   mutationConfig,
-  userId
-}: UsePostClaimTipOptions = {}) {
+  userId,
+}: UsePostClaimReferralRewardOptions = {}) {
   const queryClient = useQueryClient();
   const { onSuccess, ...restConfig } = mutationConfig || {};
 
@@ -33,6 +32,6 @@ export function usePostClaimTip({
       onSuccess?.(...args);
     },
     ...restConfig,
-    mutationFn: postClaimTipFn,
+    mutationFn: postClaimReferralRewardFn,
   });
 }

@@ -3,14 +3,24 @@ import AvatarPlaceHolder from "@/assets/icons/avatar-image.svg";
 import { Button } from "@/components/ui/button";
 import { FriendItems } from "./friend-item";
 import { FaUser } from "react-icons/fa6";
-import { Referrals } from "../utils/types";
+import { ReferralAPIResponse } from "../utils/types";
+import { UserAPIResponse } from "@/types";
 
 interface FriendProps {
   openInvite: () => void;
-  data?: Referrals[]; // Expecting data to be an array of Referrals
+  data?: ReferralAPIResponse; // Expecting data to be an array of Referrals
+  handleClaim: () => void;
+  userData: UserAPIResponse | undefined;
 }
 
-export const AvailableFriends = ({ openInvite, data }: FriendProps) => {
+export const AvailableFriends = ({
+  openInvite,
+  data,
+  handleClaim,
+  userData,
+}: FriendProps) => {
+  const friends = data?.data?.referrals.length;
+
   return (
     <>
       <div className="flex flex-col justify-between h-full">
@@ -21,26 +31,31 @@ export const AvailableFriends = ({ openInvite, data }: FriendProps) => {
               <AvatarFallback className="text-2xl">CN</AvatarFallback>
             </Avatar>
             <h1 className="text-4xl font-bold text-center my-5 w-3/4">
-              WUSD 0
+              WUSD {userData?.data?.user?.referralRewardPoint}
             </h1>
 
-            <Button variant="default" size="lg" className="rounded-full w-[60%] text-xl font-bold">
+            <Button
+              onClick={handleClaim}
+              variant="default"
+              size="lg"
+              className="rounded-full w-[60%] text-xl font-bold"
+            >
               Claim
             </Button>
           </div>
 
           <div className="mt-[30px] mb-[20px]">
-            <p className="font-bold text-xl">{data?.length || 0} Friends</p>
+            <p className="font-bold text-xl">{friends || 0} Friends</p>
           </div>
 
           <div className="space-y-4 overflow-y-auto h-[150px]">
-            {data?.map((referral) => (
+            {data?.data?.referrals.map((referral) => (
               <FriendItems
-                key={referral.referral.id} // Ensure to use a unique key
-                username={referral.referral.username}
-                firstName={referral.referral.firstName}
-                lastName={referral.referral.lastName}
-                points={referral.referral.balance} // Assuming balance represents referral points
+                key={referral.id} // Ensure to use a unique key
+                username={referral.username}
+                firstName={referral.firstName}
+                lastName={referral.lastName}
+                points={300} // Assuming balance represents referral points
               />
             ))}
           </div>

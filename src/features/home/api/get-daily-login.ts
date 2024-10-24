@@ -13,7 +13,7 @@ export const getDailyLogin = ({
 
 export const getDailyLoginQueryOptions = (userId: string | undefined) => {
   return queryOptions({
-    queryKey: ["user", userId],
+    queryKey: ["user/dailylogin", userId],
     queryFn: () => getDailyLogin({ userId }),
   });
 };

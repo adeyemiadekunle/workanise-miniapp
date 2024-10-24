@@ -13,7 +13,7 @@ export const FriendItems = ({ username, points, photoUrl, firstName, lastName }:
    return (<>
       <div className="flex justify-between items-center">
          <div className="flex gap-3 items-center">
-            <Avatar className="w-12 h-12 text-black">
+            <Avatar className="w-10 h-10 text-black">
                <AvatarImage src={photoUrl} />
                <AvatarFallback className="text-[14px] font-bold">{getInitials(firstName, lastName)}</AvatarFallback>
             </Avatar>

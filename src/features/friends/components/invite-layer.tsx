@@ -20,11 +20,11 @@ export const InviteLayer = ({ open, setClose }: InviteProps) => {
 
    const { user } = fetchLocalUserData() || {}
 
-   const userId = user.id;
+   const userId = user?.id;
 
    const { data } = useGetUser({ userId })  // get user
 
-   const referralUrl = `${botUrl}?start=${data?.data.user.referralCode}`;
+   const referralUrl = `${botUrl}?start=${data?.data?.user?.referralCode}`;
 
    const copyReferralUrl = async () => {
       try {

@@ -33,6 +33,7 @@ export interface User {
     createdAt: string;
     updatedAt: string;
     balance: number;
+    referralRewardPoint?: number
   };
 }
 

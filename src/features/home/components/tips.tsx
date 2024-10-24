@@ -27,7 +27,7 @@ export const Tips = ({ open, setClose, reward }: TipsProps) => {
                <div className="border p-2 rounded-full bg-slate-800 border-slate-800" onClick={() => setClose?.(false)}><FaXmark size={24} /></div>
             </div>
 
-            <div className="flex flex-col justify-center items-center mt-[40px] w-full">
+            <div className="flex flex-col justify-center items-center mt-[40px] w-full px-4">
                {reward > 0 ? (
                   <>
                      <div className="relative flex flex-col justify-center items-center w-full">

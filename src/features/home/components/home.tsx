@@ -1,33 +1,28 @@
 import Avatar from "@/assets/icons/avatar.svg"
 import LogoWhite from "@/assets/icons/logo2-white.svg"
 import Logo2 from "@/assets/icons/logo2.svg"
-import { useGetSession } from "../api/get-session";
-import { useGetUser } from "@/api/get-user";
 import { usePostStartSession } from "../api/post-start-session";
 // import { useToast } from "@/hooks/ToastContext";
 import { fetchLocalUserData } from "@/lib/local-storage";
 import { formatTime, formatNumber } from "@/utils/helper-funcs";
+import { SessionAPIResponse } from "../utils/types";
+import { UserAPIResponse } from '../../../types/index';
 
 
 interface HomeProps {
    username?: string
+   sessionData: SessionAPIResponse | undefined
+   userData: UserAPIResponse | undefined
 }
 
-export const HomeComponent = ({ username }: HomeProps) => {
+export const HomeComponent = ({ username, sessionData, userData }: HomeProps) => {
    const { user } = fetchLocalUserData() || {}
 
    // const { showToast } = useToast();
    const userId = user.id;
 
 
-   const { data, } = useGetSession({
-      userId,
-      refetchInterval: 1000 // Refetch data every second
-   });  // get session
-
-   const { data: userData } = useGetUser({ userId })  // get user
-
-   const { active, remainingTimeSeconds, earnedPoints } = data?.data?.session || {};
+   const { active, remainingTimeSeconds, earnedPoints } = sessionData?.data?.session || {};
 
    const { mutate } = usePostStartSession({
       mutationConfig: {
@@ -61,7 +56,7 @@ export const HomeComponent = ({ username }: HomeProps) => {
 
                <h3 className={`text-[32px] ${active == true ? 'text-white' : 'text-secondary'} font-bold mt-[15px]`}>{username}</h3>
 
-               <div className={`text-[40px] ${active == true ? 'text-white' : 'text-secondary'} font-bold mt-[10px]`}>{userData?.data.user.balance} WP</div>
+               <div className={`text-[40px] ${active == true ? 'text-white' : 'text-secondary'} font-bold mt-[10px]`}>{userData?.data?.user?.balance} WP</div>
                {/* animate the change in number */}
             </div>
          </div>
