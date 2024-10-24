@@ -3,6 +3,8 @@ import { DailyLoginReward } from './components/daily-login';
 import { Tips } from './components/tips';
 import { useState } from 'react';
 import { HomeComponent } from './components/home';
+import { fetchLocalUserData } from '@/lib/local-storage';
+import { usePostClaimTip } from './api/claim-tip';
 
 
 export const Home = () => {
@@ -10,14 +12,37 @@ export const Home = () => {
 
   const [openDaily, setCloseDaily] = useState(false);
   const [openTips, setCloseTips] = useState(false);
+  const [tipReward, setTipReward] = useState(0)
+
+  const { user } = fetchLocalUserData() || {}
+  const userId = user.id;
+
+
+
+  const { mutate: claim } = usePostClaimTip({
+    mutationConfig: {
+      onSuccess: (response) => {
+        console.log(response.data.rewardAmount)
+        setTipReward(response.data.rewardAmount)
+        setCloseTips(true);
+      },
+    },
+  })
+
+  const handleClaim = () => {
+    try {
+      claim?.({ userId })
+    } catch (error) {
+      console.error("Error starting session:", error);
+    }
+  }
+
+
 
   // const handleOpen = () => {
   //   setCloseDaily(true);
   // };
 
-  const openNextDrawer = () => {
-    setCloseTips(true); // Opens the Tips drawer after DailyLoginReward is closed
-  };
 
   if (!initData) {
     return null;
@@ -32,12 +57,13 @@ export const Home = () => {
       <DailyLoginReward
         open={openDaily}
         setClose={setCloseDaily}
-        openNextDrawer={openNextDrawer} // Pass the function to open Tips
+        handleClaim={handleClaim} // Pass the function to claim reward
       />
 
       <Tips
         open={openTips}
         setClose={setCloseTips}
+        reward={tipReward}
       />
 
     </>

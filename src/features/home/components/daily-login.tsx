@@ -5,18 +5,18 @@ import { DailyCustomDrawer } from "@/components/ui/drawer/daily-reward-drawer"
 interface DailyLoginProps {
   open: boolean;
   setClose?: (open: boolean) => void;
-  openNextDrawer: () => void; // New prop to open the next drawer
+  handleClaim: () => void; // New prop to open the next drawer
 }
 
-export const DailyLoginReward = ({ open, setClose, openNextDrawer }: DailyLoginProps) => {
+export const DailyLoginReward = ({ open, setClose, handleClaim }: DailyLoginProps) => {
 
   const handleCloseandContinue = () => {
     setClose?.(false); // Closes the drawer
 
   };
 
-  const handleTip = () => {
-    openNextDrawer(); // Opens the Tips drawer
+  const claim = () => {
+    handleClaim(); // Opens the Tips drawer
   }
 
   return (
@@ -29,7 +29,7 @@ export const DailyLoginReward = ({ open, setClose, openNextDrawer }: DailyLoginP
           <h1 className="text-[30px] text-primary font-bold text-center">Your Daily Rewards</h1>
         </div>
         <div className="flex flex-col justify-center items-center mb-[20px]">
-          <div onClick={handleTip} className="flex flex-col items-center mb-[10px]">
+          <div onClick={claim} className="flex flex-col items-center mb-[10px]">
             <img src={Reward} alt="reward" width='60%' />
           </div>
           <p className="text-[16px]">Click the box to collect reward</p>

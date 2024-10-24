@@ -3,17 +3,17 @@ import OPS from "@/assets/icons/ops.gif"
 import Congrat from "@/assets/icons/congrats.gif"
 import Cone from "@/assets/icons/cone.gif"
 import { FaXmark, FaQrcode } from "react-icons/fa6";
-import { useState } from "react";
+
+
 
 interface TipsProps {
    open: boolean,
    setClose?: (open: boolean) => void,
-
+   reward: number
 }
 
-export const Tips = ({ open, setClose }: TipsProps) => {
+export const Tips = ({ open, setClose, reward }: TipsProps) => {
 
-   const [reward] = useState(true)
 
    return (
       <CustomDrawer
@@ -28,7 +28,7 @@ export const Tips = ({ open, setClose }: TipsProps) => {
             </div>
 
             <div className="flex flex-col justify-center items-center mt-[40px] w-full">
-               {reward ? (
+               {reward > 0 ? (
                   <>
                      <div className="relative flex flex-col justify-center items-center w-full">
                         <img src={Congrat} alt="ops" width='100%' className="absolute z-0" />
@@ -38,7 +38,7 @@ export const Tips = ({ open, setClose }: TipsProps) => {
                      <div className="w-full h-[2px] bg-slate-500 my-3" />
                      <p className="text-center text-[14px] text-gray-400">Tip Reward have been added to your
                         Account.
-                        Complete 5 more consecutive sessions
+                        Complete 3 or more consecutive sessions
                         for your next Tips Rewards.</p>
                   </>
                ) : (
