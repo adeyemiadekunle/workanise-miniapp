@@ -1,31 +1,26 @@
 import Avatar from "@/assets/icons/avatar.svg"
-import Logo2 from "@/assets/icons/logo2-white.svg"
-import { useGetSession } from "../api/get-session";
+import LogoWhite from "@/assets/icons/logo2-white.svg"
+import Logo2 from "@/assets/icons/logo2.svg"
 import { usePostStartSession } from "../api/post-start-session";
-// import { useToast } from "@/hooks/ToastContext";
 import { fetchLocalUserData } from "@/lib/local-storage";
-import { formatTime } from "@/utils/helper-funcs";
+import { formatTime, formatNumber } from "@/utils/helper-funcs";
+import { SessionAPIResponse } from "../utils/types";
+import { UserAPIResponse } from '../../../types/index';
 
 
-// interface HomeProps {
-//    username?: string
-// }
+interface HomeProps {
+   username?: string
+   sessionData: SessionAPIResponse | undefined
+   userData: UserAPIResponse | undefined
+}
 
-export const HomeComponent = () => {
+export const HomeComponent = ({ username, sessionData, userData }: HomeProps) => {
    const { user } = fetchLocalUserData() || {}
 
-   // Check if user is defined before accessing user.id
-   // const { showToast } = useToast();
-   const userId = user.id; // Use optional chaining to safely access user.id
+   const userId = user.id;
 
-   console.log(user)
 
-   const { data, } = useGetSession({
-      userId,
-      refetchInterval: 1000 // Refetch data every second
-   });
-
-   const { active, remainingTimeSeconds, earnedPoints } = data?.data?.session || {};
+   const { active, remainingTimeSeconds, earnedPoints } = sessionData?.data?.session || {};
 
    const { mutate } = usePostStartSession({
       mutationConfig: {
@@ -40,10 +35,8 @@ export const HomeComponent = () => {
          mutate?.({ userId })
       } catch (error) {
          console.error("Error starting session:", error);
-         // showToast(`Error to start session ${error}`, 'error')
       }
    }
-
 
 
    return (
@@ -59,23 +52,27 @@ export const HomeComponent = () => {
                   <img src={Avatar} alt="avatar" />
                </div>
 
-               <h3 className={`text-[32px] ${active == true ? 'text-white' : 'text-secondary'} font-bold mt-[15px]`}>{user?.username}</h3>
+               <h3 className={`text-[32px] ${active == true ? 'text-white' : 'text-secondary'} font-bold mt-[15px]`}>{username}</h3>
 
-               <div className={`text-[40px] ${active == true ? 'text-white' : 'text-secondary'} font-bold mt-[10px]`}>500 WP</div>
+               <div className={`text-[40px] ${active == true ? 'text-white' : 'text-secondary'} font-bold mt-[10px]`}>{userData?.data?.user?.balance} WP</div>
                {/* animate the change in number */}
             </div>
          </div>
 
 
          <div className="pb-6 relative w-[100%]">
-            <div className="flex w-full h-[70px] bg-secondary items-center justify-end px-3 rounded-3xl absolute z-0">
-               <p className="">{formatTime(remainingTimeSeconds || 0)}</p>
+            <div className="flex w-full h-[60px] bg-secondary items-center justify-end px-5 rounded-3xl absolute z-0">
+               <p className="font-[600]">{
+                  formatTime(remainingTimeSeconds || 0)
+               }</p>
                {/* to animate */}
             </div>
-            <div className={`flex w-[75%] h-[70px] ${active == true ? 'bg-primary' : 'bg-secondary'} items-center justify-between px-5 rounded-3xl relative z-4`}>
-               <img src={Logo2} alt="logo2" />
+            <div className={`flex w-[75%] h-[60px] ${active == true ? 'bg-primary' : 'bg-secondary'} items-center justify-between px-7 rounded-3xl relative z-4`}>
+               {
+                  active ? (<img src={LogoWhite} alt="logo2" />) : (<img src={Logo2} alt="logo2" />)
+               }
                <p className="py-0.5 px-3 bg-slate-800 rounded-md text-[12px] text-nowrap">Seller is active</p>
-               <p className="text-black">{earnedPoints}</p>
+               <p className="text-black font-[600]">{formatNumber(earnedPoints)}</p>
                {/* to animate */}
             </div>
          </div>

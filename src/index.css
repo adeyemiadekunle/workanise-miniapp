@@ -72,7 +72,7 @@
     color: white;
     background: black;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 13px;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -90,4 +90,14 @@
     height: 100%;
   }
 
+
+  
 }
+
+
+
+
+/* display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; */

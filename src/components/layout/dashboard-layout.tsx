@@ -9,7 +9,7 @@ export const DashboardLayout = () => {
 
     return (
         <main className="flex flex-col h-full text-white">
-            <div className='w-full h-full flex flex-col py-3 px-5 mb-[60px]'>
+            <div className='w-full h-full flex flex-col py-3 px-6 mb-[60px]'>
                 <Outlet />
             </div>
             <nav

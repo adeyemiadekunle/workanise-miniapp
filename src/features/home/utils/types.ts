@@ -26,3 +26,22 @@ export interface Session {
 }
 
 export type SessionAPIResponse = ApiResponse<Session>;
+
+export type DailyLoginTip = {
+  dailyLogin: {
+    id: string;
+    createdAt: Date;
+    userId: string;
+    acceptedSessionsCount: number;
+    active: boolean;
+    lastUpdated: Date;
+  };
+};
+
+export type DailyLoginAPIResponse = ApiResponse<DailyLoginTip>;
+
+export type ClaimTip = {
+  rewardAmount: number;
+};
+
+export type ClaimTipAPIResponse = ApiResponse<ClaimTip>;
