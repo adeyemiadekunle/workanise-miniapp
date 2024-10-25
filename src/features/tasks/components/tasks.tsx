@@ -28,7 +28,7 @@ export const Task = () => {
          </div>
          <div className="mt-[20px]">
             <Tabs defaultValue="new" className="w-full">
-               <TabsList className="grid w-full grid-cols-4">
+               <TabsList className="grid w-full grid-cols-4 ">
                   <TabsTrigger value="new">New</TabsTrigger>
                   <TabsTrigger value="onchain">Onchain</TabsTrigger>
                   <TabsTrigger value="social">Socials</TabsTrigger>

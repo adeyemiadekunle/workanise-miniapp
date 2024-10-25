@@ -2,7 +2,6 @@ import Avatar from "@/assets/icons/avatar.svg"
 import LogoWhite from "@/assets/icons/logo2-white.svg"
 import Logo2 from "@/assets/icons/logo2.svg"
 import { usePostStartSession } from "../api/post-start-session";
-// import { useToast } from "@/hooks/ToastContext";
 import { fetchLocalUserData } from "@/lib/local-storage";
 import { formatTime, formatNumber } from "@/utils/helper-funcs";
 import { SessionAPIResponse } from "../utils/types";
@@ -18,7 +17,6 @@ interface HomeProps {
 export const HomeComponent = ({ username, sessionData, userData }: HomeProps) => {
    const { user } = fetchLocalUserData() || {}
 
-   // const { showToast } = useToast();
    const userId = user.id;
 
 

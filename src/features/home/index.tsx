@@ -8,6 +8,7 @@ import { usePostClaimTip } from "./api/claim-tip";
 import { useGetSession } from "./api/get-session";
 import { useGetUser } from "@/api/get-user";
 import { useGetDailyLogin } from "./api/get-daily-login";
+import { QueryWrapper } from "@/components/layout";
 
 export const Home = () => {
   const initData = initDataUser();
@@ -20,13 +21,13 @@ export const Home = () => {
   const userId = user.id;
 
   const { data: dailyLogin } = useGetDailyLogin({ userId });
-
   const { data: sessionData } = useGetSession({
     userId,
-    refetchInterval: 2000 // Refetch data every second
+    refetchInterval: 2000, // Refetch data every second
   });
 
-  const { data: userData } = useGetUser({ userId });
+  const getUser = useGetUser({ userId });
+  const { data: userData } = getUser || {};
 
   const { mutate: claim } = usePostClaimTip({
     mutationConfig: {
@@ -35,7 +36,7 @@ export const Home = () => {
         setOpenTips(true);
       },
     },
-    userId
+    userId,
   });
 
   // Use useEffect to avoid setting state during the render phase
@@ -60,7 +61,7 @@ export const Home = () => {
   }
 
   return (
-    <>
+    <QueryWrapper currentQuery={getUser}>
       <HomeComponent
         username={initData.username}
         sessionData={sessionData}
@@ -74,6 +75,6 @@ export const Home = () => {
       />
 
       <Tips open={openTips} setClose={setOpenTips} reward={tipReward} />
-    </>
+    </QueryWrapper>
   );
 };

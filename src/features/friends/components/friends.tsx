@@ -11,6 +11,7 @@ interface FriendProps {
   data?: ReferralAPIResponse; // Expecting data to be an array of Referrals
   handleClaim: () => void;
   userData: UserAPIResponse | undefined;
+  isPending: boolean;
 }
 
 export const AvailableFriends = ({
@@ -18,6 +19,7 @@ export const AvailableFriends = ({
   data,
   handleClaim,
   userData,
+  isPending
 }: FriendProps) => {
   const friends = data?.data?.referrals.length;
 
@@ -62,7 +64,7 @@ export const AvailableFriends = ({
         </div>
 
         <div className="pb-1 flex items-center justify-center p-2">
-          <Button onClick={() => openInvite()} variant="secondary" size="lg">
+          <Button onClick={() => openInvite()} variant="secondary" size="lg" disabled={isPending}>
             <FaUser size={18} className="mr-2" />
             Invite
           </Button>

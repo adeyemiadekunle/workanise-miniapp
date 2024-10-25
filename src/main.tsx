@@ -8,6 +8,7 @@ import { Root } from "@/components/layout/root";
 
 import "./index.css";
 import "@telegram-apps/telegram-ui/dist/styles.css";
+import "react-toastify/dist/ReactToastify.css";
 
 
 // Configure all application dependencies

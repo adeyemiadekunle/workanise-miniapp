@@ -3,3 +3,11 @@ export type ApiResponse<T = undefined> = {
 	// statusCode: number
 	message: string
 }
+
+export interface CustomError {
+	response?: {
+		data?: {
+			message?: string
+		}
+	}
+}
