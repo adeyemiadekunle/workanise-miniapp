@@ -21,7 +21,7 @@ export const InviteLayer = ({ open, setClose }: InviteProps) => {
 
   const { data } = useGetUser({ userId }); // get user
 
-  const referralUrl = `${botUrl}?start=${data?.data?.user?.referralCode}`;
+  const referralUrl = `${botUrl}?startapp=${data?.data?.user?.referralCode}`;
 
   const copyReferralUrl = async () => {
     try {
