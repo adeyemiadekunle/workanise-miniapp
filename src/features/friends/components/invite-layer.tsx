@@ -11,7 +11,7 @@ interface InviteProps {
   open: boolean;
   setClose?: (open: boolean) => void;
 }
-const botUrl = import.meta.env.VITE_BOT_URL as string;
+const botUrl = import.meta.env.VITE_MINIAPP_URL as string;
 
 export const InviteLayer = ({ open, setClose }: InviteProps) => {
   const [copied, setCopied] = useState(false);
@@ -21,7 +21,7 @@ export const InviteLayer = ({ open, setClose }: InviteProps) => {
 
   const { data } = useGetUser({ userId }); // get user
 
-  const referralUrl = `${botUrl}?start=${data?.data?.user?.referralCode}`;
+  const referralUrl = `${botUrl}?start=app_${data?.data?.user?.referralCode}`;
 
   const copyReferralUrl = async () => {
     try {
