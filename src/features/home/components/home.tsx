@@ -59,23 +59,25 @@ export const HomeComponent = ({
           </p>
         </div>
         <div className="flex flex-col justify-center items-center mt-[30px]">
-          <Avatar
-            onClick={startSession}
-            className={`border h-52 w-52 p-3 rounded-full ${
+          <div
+            className={` flex flex-col items-center justify-center p-3 border ${
               active
                 ? "bg-primary border-primary"
                 : "bg-secondary border-secondary"
-            } cursor-pointer`}
+            }  rounded-full  cursor-pointer`}
           >
-            <AvatarImage
-              src={imageUrl}
-              alt={`${username}'s Avatar`}
-              onError={() => setImageUrl(Avatars)} // Set default avatar on error
-            />
-            <AvatarFallback>
-              {/* Optionally add a default fallback component here */}
-            </AvatarFallback>
-          </Avatar>
+            <Avatar onClick={startSession} className={`h-44 w-44 `}>
+              <AvatarImage
+                src={imageUrl}
+                alt={`${username}'s Avatar`}
+                onError={() => setImageUrl(Avatars)}
+                // Set default avatar on error
+              />
+              <AvatarFallback>
+                {/* Optionally add a default fallback component here */}
+              </AvatarFallback>
+            </Avatar>
+          </div>
 
           <h3
             className={`text-[32px] ${

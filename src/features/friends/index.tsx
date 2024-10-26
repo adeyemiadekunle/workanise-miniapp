@@ -57,7 +57,7 @@ export const Friends = () => {
           />
         </>
       ) : (
-        <FirstTimeRefferal openInvite={Invite} />
+        <FirstTimeRefferal openInvite={Invite} userData={userData}/>
       )}
 
       <InviteLayer open={openInvite} setClose={setOpenInvite} />

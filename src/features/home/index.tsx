@@ -9,7 +9,6 @@ import { useGetSession } from "./api/get-session";
 import { useGetUser } from "@/api/get-user";
 import { useGetDailyLogin } from "./api/get-daily-login";
 import { QueryWrapper } from "@/components/layout";
-import { Welcome } from "@/components/layout/welcome";
 
 export const Home = () => {
   const initData = initDataUser();
@@ -62,7 +61,7 @@ export const Home = () => {
   }
 
   return (
-    <QueryWrapper currentQuery={getUser} CustomLoader={<Welcome/>}>
+    <QueryWrapper currentQuery={getUser}>
       <HomeComponent
         username={initData.username}
         sessionData={sessionData}

@@ -9,7 +9,7 @@ import { useState } from "react";
 
 interface FriendProps {
   openInvite: () => void;
-  data?: ReferralAPIResponse | undefined // Expecting data to be an array of Referrals
+  data?: ReferralAPIResponse | undefined; // Expecting data to be an array of Referrals
   handleClaim: () => void;
   userData: UserAPIResponse | undefined;
   isPending: boolean;
@@ -20,9 +20,8 @@ export const AvailableFriends = ({
   data,
   handleClaim,
   userData,
-  isPending
+  isPending,
 }: FriendProps) => {
-
   const [imageUrl, setImageUrl] = useState(
     userData?.data?.user?.photoUrl || AvatarPlaceHolder
   ); // Default to Avatars if not available
@@ -35,11 +34,11 @@ export const AvailableFriends = ({
         <div className="mt-5 px-3">
           <div className="pt-3 flex items-center flex-col justify-center space-y-6">
             <Avatar className="w-28 h-28 text-black">
-            <AvatarImage
-              src={imageUrl}
-              alt={`${userData?.data?.user?.username}'s Avatar`}
-              onError={() => setImageUrl(AvatarPlaceHolder)} // Set default avatar on error
-            /><AvatarImage src={AvatarPlaceHolder} />
+              <AvatarImage
+                src={imageUrl}
+                alt={`${userData?.data?.user?.username}'s Avatar`}
+                onError={() => setImageUrl(AvatarPlaceHolder)} // Set default avatar on error
+              />
               <AvatarFallback className="text-2xl"></AvatarFallback>
             </Avatar>
             <h1 className="text-4xl font-bold text-center my-5 w-3/4">
@@ -69,14 +68,19 @@ export const AvailableFriends = ({
                 firstName={referral.firstName}
                 lastName={referral.lastName}
                 photoUrl={referral.photoUrl}
-                points={300} // Assuming balance represents referral points
+                points={200} // Assuming balance represents referral points
               />
             ))}
           </div>
         </div>
 
         <div className="pb-[40px] flex items-center justify-center p-2">
-          <Button onClick={() => openInvite()} variant="secondary" size="lg" disabled={isPending}>
+          <Button
+            onClick={() => openInvite()}
+            variant="secondary"
+            size="lg"
+            disabled={isPending}
+          >
             <FaUser size={18} className="mr-2" />
             Invite
           </Button>
