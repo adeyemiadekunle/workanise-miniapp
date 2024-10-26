@@ -15,8 +15,8 @@ export const WeeklyTaskCard = ({ onClick }: WeeklyTaskCardProps) => {
                <h2 className="text-xl font-bold text-white">Workanise Quest</h2>
             </div>
             <div className="flex justify-between items-center mt-[20px]">
-               <button className="bg-white text-black rounded-3xl py-2.5 px-5">Start</button>
-               <button className="bg-tranparent  text-white rounded-3xl py-2 px-5 border-[4px] border-gray-700 ">0/3</button>
+               <button type="button" className="bg-white text-black rounded-3xl py-2.5 px-5">Start</button>
+               <button type="button" className="bg-tranparent  text-white rounded-3xl py-2 px-5 border-[4px] border-gray-700 ">0/3</button>
             </div>
 
          </CardContent>
