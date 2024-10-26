@@ -7,6 +7,7 @@ import { formatTime, formatNumber } from "@/utils/helper-funcs";
 import { SessionAPIResponse } from "../utils/types";
 import { UserAPIResponse } from "@/types/index";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { useState } from "react";
 
 interface HomeProps {
   username?: string;
@@ -20,6 +21,10 @@ export const HomeComponent = ({
   userData,
 }: HomeProps) => {
   const { user } = fetchLocalUserData() || {};
+
+  const [imageUrl, setImageUrl] = useState(
+    userData?.data?.user?.photoUrl || Avatars
+  ); // Default to Avatars if not available
 
   const userId = user.id;
 
@@ -54,17 +59,25 @@ export const HomeComponent = ({
           </p>
         </div>
         <div className="flex flex-col justify-center items-center mt-[30px]">
-          <Avatar
-            onClick={startSession}
-            className={`border h-52 w-52 p-3 rounded-full ${
-              active == true
+          <div
+            className={` flex flex-col items-center justify-center p-3 border ${
+              active
                 ? "bg-primary border-primary"
                 : "bg-secondary border-secondary"
-            }  cursor-pointer`}
+            }  rounded-full  cursor-pointer`}
           >
-            <AvatarImage src={Avatars} className="" />
-            <AvatarFallback></AvatarFallback>
-          </Avatar>
+            <Avatar onClick={startSession} className={`h-44 w-44 `}>
+              <AvatarImage
+                src={imageUrl}
+                alt={`${username}'s Avatar`}
+                onError={() => setImageUrl(Avatars)}
+                // Set default avatar on error
+              />
+              <AvatarFallback>
+                {/* Optionally add a default fallback component here */}
+              </AvatarFallback>
+            </Avatar>
+          </div>
 
           <h3
             className={`text-[32px] ${

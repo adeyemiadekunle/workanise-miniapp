@@ -2,19 +2,30 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { FaUser } from "react-icons/fa6";
 import AvatarPlaceHolder from "@/assets/icons/avatar-image.svg";
+import { UserAPIResponse } from "@/types";
+import { useState } from "react";
 
 interface FirstTimeRefferalProps {
   openInvite: () => void;
+  userData: UserAPIResponse | undefined;
 }
 
-export const FirstTimeRefferal = ({ openInvite }: FirstTimeRefferalProps) => {
+export const FirstTimeRefferal = ({ openInvite, userData }: FirstTimeRefferalProps) => {
+
+  const [imageUrl, setImageUrl] = useState(
+    userData?.data?.user?.photoUrl || AvatarPlaceHolder
+  ); // Default to Avatars if not available
   return (
     <>
       <div className="pt-10 px-3 h-full  flex flex-col justify-between ">
         <div>
           <div className="flex flex-col items-center justify-center mb-[20px]">
             <Avatar className=" w-24 h-24 text-black">
-              <AvatarImage src={AvatarPlaceHolder} />
+            <AvatarImage
+              src={imageUrl}
+              alt={`${userData?.data?.user?.username}'s Avatar`}
+              onError={() => setImageUrl(AvatarPlaceHolder)} // Set default avatar on error
+            />
               <AvatarFallback className="text-2xl">CN</AvatarFallback>
             </Avatar>
             <h1 className="text-3xl font-bold text-center my-5 w-3/4">

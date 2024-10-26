@@ -15,7 +15,7 @@ export const Login = () => {
 
   const { showToast } = useToast();
 
-  const { mutate,} = useLogin({
+  const { mutate } = useLogin({
     mutationConfig: {
       onSuccess: (response) => {
         storeLocalUserData(response?.data);
@@ -27,13 +27,14 @@ export const Login = () => {
       },
     },
   });
-  const startParam = initDataStartParam(); // This would give "app_12345"
-  const referralCode = startParam?.split('_')[1]; // Extracts "12345"
+
+  const startParam = initDataStartParam();
+
   const initUser = initDataUser();
 
   const handleLogin = () => {
     if (initUser) {
-      mutate({ referralCode: referralCode });
+      mutate({ referralCode: startParam });
     }
   };
 
