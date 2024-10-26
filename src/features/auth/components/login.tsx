@@ -27,12 +27,13 @@ export const Login = () => {
       },
     },
   });
-  const startParam = initDataStartParam();
+  const startParam = initDataStartParam(); // This would give "app_12345"
+  const referralCode = startParam?.split('_')[1]; // Extracts "12345"
   const initUser = initDataUser();
 
   const handleLogin = () => {
     if (initUser) {
-      mutate({ referralCode: startParam });
+      mutate({ referralCode: referralCode });
     }
   };
 
