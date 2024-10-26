@@ -29,7 +29,7 @@ export default function ToastNotification() {
     >
       <div className="flex items-center">
         <Icon  className={`size-6 mr-2 ${iconColor}`} aria-hidden="true" />
-        <span className={`text-sm font-medium ${textColor}`}>
+        <span className={`text-base font-medium ${textColor}`}>
           {toast.message}
         </span>
       </div>

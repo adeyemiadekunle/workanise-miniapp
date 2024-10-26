@@ -15,15 +15,15 @@ export const Login = () => {
 
   const { showToast } = useToast();
 
-  const { mutate, error } = useLogin({
+  const { mutate,} = useLogin({
     mutationConfig: {
       onSuccess: (response) => {
         storeLocalUserData(response?.data);
         dispatch(saveToState(response?.data));
         navigate("/");
       },
-      onError: () => {
-        showToast(`${error?.message}`, "error");
+      onError: (error) => {
+        showToast(`Login error: ${error.message}`, "error");
       },
     },
   });

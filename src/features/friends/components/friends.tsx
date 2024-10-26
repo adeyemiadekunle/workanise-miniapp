@@ -33,7 +33,7 @@ export const AvailableFriends = ({
               <AvatarFallback className="text-2xl">CN</AvatarFallback>
             </Avatar>
             <h1 className="text-4xl font-bold text-center my-5 w-3/4">
-              WUSD {userData?.data?.user?.referralRewardPoint}
+              WP {userData?.data?.user?.referralRewardPoint}
             </h1>
 
             <Button
@@ -41,6 +41,7 @@ export const AvailableFriends = ({
               variant="default"
               size="lg"
               className="rounded-full w-[60%] text-xl font-bold"
+              disabled={userData?.data?.user?.referralRewardPoint == 0}
             >
               Claim
             </Button>
@@ -50,7 +51,7 @@ export const AvailableFriends = ({
             <p className="font-bold text-xl">{friends || 0} Friends</p>
           </div>
 
-          <div className="space-y-4 overflow-y-auto h-[150px]">
+          <div className="space-y-4 overflow-y-auto h-[180px]">
             {data?.data?.referrals.map((referral) => (
               <FriendItems
                 key={referral.id} // Ensure to use a unique key
@@ -63,7 +64,7 @@ export const AvailableFriends = ({
           </div>
         </div>
 
-        <div className="pb-1 flex items-center justify-center p-2">
+        <div className="pb-[40px] flex items-center justify-center p-2">
           <Button onClick={() => openInvite()} variant="secondary" size="lg" disabled={isPending}>
             <FaUser size={18} className="mr-2" />
             Invite

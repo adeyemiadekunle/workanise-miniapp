@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useGetUser } from "@/api/get-user";
 import { fetchLocalUserData } from "@/lib/local-storage";
 import { useState } from "react";
-import { Copy, CheckCircle2 } from "lucide-react";
+import { Copy, CheckCircle2,  } from "lucide-react";
 import { shareURL } from "@telegram-apps/sdk-react";
 
 interface InviteProps {
@@ -44,7 +44,7 @@ export const InviteLayer = ({ open, setClose }: InviteProps) => {
       open={open}
       openChange={() => setClose?.(false)}
       footer={
-        <div onClick={() => setClose?.(false)} className="text-center">
+        <div onClick={() => setClose?.(false)} className="text-center pb-2">
           Close
         </div>
       }
