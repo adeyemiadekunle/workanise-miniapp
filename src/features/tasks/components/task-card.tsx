@@ -8,7 +8,7 @@ interface TaskCardProps {
 export const TaskCard = ({ onClick }: TaskCardProps) => {
    return (<>
       <Card
-         className="bg-primary w-[300px] flex-shrink-0 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+         className="bg-primary w-[270px] flex-shrink-0 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
          onClick={onClick}
       >
          <CardContent>
@@ -23,8 +23,8 @@ export const TaskCard = ({ onClick }: TaskCardProps) => {
                <p className="pt-2">+5000 WP</p>
             </div>
             <div className="flex justify-between items-center mt-[10px]">
-               <button className="bg-gray-900 text-white rounded-3xl py-3 px-6">Start</button>
-               <button className="bg-white  text-black rounded-3xl py-2 px-6 border-[4px] border-gray-300 ">0/3</button>
+               <button type="button" className="bg-gray-900 text-white rounded-3xl py-2.5 px-5">Start</button>
+               <button type='button' className="bg-white  text-black rounded-3xl py-2 px-5 border-[4px] border-gray-300 ">0/3</button>
             </div>
 
          </CardContent>

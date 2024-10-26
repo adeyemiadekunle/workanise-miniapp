@@ -61,6 +61,7 @@
 @layer base {
   :root {
     --safe-area-inset-bottom: calc(100% - var(--tg-viewport-stable-height, 100%));
+
   }
 
 
@@ -68,17 +69,16 @@
   body {
     margin: 0;
     padding-bottom: var(--safe-area-inset-bottom);
-    min-height: 100%;
     color: white;
     background: black;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 13px;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: "Montserrat", sans-serif;
-
+    height: 100%;
     -ms-overflow-style: none;
 
     /* IE and Edge */
@@ -86,4 +86,18 @@
 
   }
 
+  #root {
+    height: 100%;
+  }
+
+
+  
 }
+
+
+
+
+/* display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; */

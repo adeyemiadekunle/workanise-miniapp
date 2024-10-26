@@ -9,7 +9,7 @@ export const postStartSessionFn = async ({
 }: {
   userId: string;
 }): Promise<SessionAPIResponse> => {
-  return api.post(`/session/start`, userId);
+  return api.post(`/session/start`, {userId});
 };
 
 type UsePostStartSessionOptions = {

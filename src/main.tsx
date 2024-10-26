@@ -10,7 +10,8 @@ import "./index.css";
 import "@telegram-apps/telegram-ui/dist/styles.css";
 
 
-// Configure all application dependencies.
+
+// Configure all application dependencies
 init(retrieveLaunchParams().startParam === 'debug' || import.meta.env.DEV);
 
 
