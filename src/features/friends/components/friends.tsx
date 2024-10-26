@@ -5,10 +5,11 @@ import { FriendItems } from "./friend-item";
 import { FaUser } from "react-icons/fa6";
 import { ReferralAPIResponse } from "../utils/types";
 import { UserAPIResponse } from "@/types";
+import { useState } from "react";
 
 interface FriendProps {
   openInvite: () => void;
-  data?: ReferralAPIResponse; // Expecting data to be an array of Referrals
+  data?: ReferralAPIResponse | undefined // Expecting data to be an array of Referrals
   handleClaim: () => void;
   userData: UserAPIResponse | undefined;
   isPending: boolean;
@@ -21,6 +22,11 @@ export const AvailableFriends = ({
   userData,
   isPending
 }: FriendProps) => {
+
+  const [imageUrl, setImageUrl] = useState(
+    userData?.data?.user?.photoUrl || AvatarPlaceHolder
+  ); // Default to Avatars if not available
+
   const friends = data?.data?.referrals.length;
 
   return (
@@ -29,8 +35,12 @@ export const AvailableFriends = ({
         <div className="mt-5 px-3">
           <div className="pt-3 flex items-center flex-col justify-center space-y-6">
             <Avatar className="w-28 h-28 text-black">
-              <AvatarImage src={AvatarPlaceHolder} />
-              <AvatarFallback className="text-2xl">CN</AvatarFallback>
+            <AvatarImage
+              src={imageUrl}
+              alt={`${userData?.data?.user?.username}'s Avatar`}
+              onError={() => setImageUrl(AvatarPlaceHolder)} // Set default avatar on error
+            /><AvatarImage src={AvatarPlaceHolder} />
+              <AvatarFallback className="text-2xl"></AvatarFallback>
             </Avatar>
             <h1 className="text-4xl font-bold text-center my-5 w-3/4">
               WP {userData?.data?.user?.referralRewardPoint}
@@ -58,6 +68,7 @@ export const AvailableFriends = ({
                 username={referral.username}
                 firstName={referral.firstName}
                 lastName={referral.lastName}
+                photoUrl={referral.photoUrl}
                 points={300} // Assuming balance represents referral points
               />
             ))}
